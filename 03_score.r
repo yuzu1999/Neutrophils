@@ -34,11 +34,6 @@ for(i in name){
 
 }
 
-
-#HB1 <- genelist$HB1[! genelist$HB1 == ""]
-#HB1_2 <- HB1[-grep("RPL|RPS|MT",HB1)]
-
-
 		
 	
 ###################  2. AddModuleScore   #################
