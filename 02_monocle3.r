@@ -10,7 +10,7 @@ gc()
 
 setwd("/home/luchun/scRNA/Neutrophil/01_Human_BM/monocle2/")
 
-sce <- dior::read_h5('../05_anno_data.h5')
+sce <- readRDS('../05_anno_data.rds')
 sce
 #17610 features across 21861 samples within 1 assay
 
