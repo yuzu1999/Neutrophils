@@ -8,7 +8,8 @@ This repository contains computational pipelines for:
 ## 🛠️ Pseudo-time Trajectory Analysis
 ### Dependencies
 ```bash
-- R (v4.1.3)
-- Seurat (v4.1.1)
-- monocle3 (v1.3.7)
-- scTour (v1.0.0)
+R (v4.1.3)
+Seurat (v4.1.1)
+monocle3 (v1.3.7)
+scTour (v1.0.0)
+```
