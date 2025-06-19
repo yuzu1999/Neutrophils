@@ -16,15 +16,13 @@ color.vector <- c(brewer.pal(8, "Set1"), brewer.pal(12, "Set3"), brewer.pal(8, "
 setwd("/home/luchun/scRNA/Neutrophil/01_Human_BM/")
 
 
-sce = dior::read_h5('05_anno_data.h5')
+sce = readRDS('05_anno_data.rds')
 sce
 
 
-
-
 ########################################################
-genelist <- read.csv("/home/luchun/scRNA/Neutrophil/Score_gene_list.csv",header=TRUE)
-#genelist <- read.csv("/home/luchun/scRNA/Neutrophil/05_17_cancers/scanpy/marker_list2.csv",header=TRUE)
+genelist <- read.csv("Score_gene_list.csv",header=TRUE)
+
 ls(genelist)
 
 name <- colnames(genelist)
@@ -45,26 +43,13 @@ for(i in name){
 	
 ###################  2. AddModuleScore   #################
 
-
 sce <- AddModuleScore(sce,features = list(lists[["PM"]]),assay = "RNA",name = "PM_AddModuleScore",ctrl = 200)
 
 sce <- AddModuleScore(sce,features = list(lists[["MC_MM"]]),assay = "RNA",name = "MC_MM_AddModuleScore",ctrl = 50)
 
 sce <- AddModuleScore(sce,features = list(lists[["BD_SC"]]),assay = "RNA",name = "BD_SC_AddModuleScore",ctrl = 200)
 
-
-
-'''
-for(i in name){
-	lis <- list(lists[[i]])
-	j <- paste(i,"AddModuleScore",sep="_")
-	
-	sce <- AddModuleScore(sce,features = lis,assay = "RNA",name = j)
-}
-'''
-
 head(sce@meta.data)
-
 
 
 
@@ -88,14 +73,6 @@ sce$leiden_res_1 <- factor(sce$leiden_res_1,levels=c(0,1,2,6,4,3,5,7,8))
 mycolor <- rev(brewer.pal(11,"RdBu")[2:10])
 
 test1 <- paste(name,"AddModuleScore1",sep="_")
-
-index <- which(sce$leiden_res_1 == 2)
-sce$Immature_AddModuleScore1[index] <- sce$Immature_AddModuleScore1[index] +0.02
-
-index <- which(sce$leiden_res_1 == 7)
-sce$Immature_AddModuleScore1[index] <- sce$Immature_AddModuleScore1[index] +0.02
-sce$Mature_AddModuleScore1[index] <- sce$Mature_AddModuleScore1[index] -0.02
-
 
 dp <- DotPlot(sce, features = test1,dot.scale = 10,scale.min = 5,assay='RNA',group.by = "leiden_res_1",scale = TRUE)+
   coord_flip()+
